@@ -35,22 +35,17 @@ export default function obfuscate(options) {
   }}" href="obfuscated">${reverse(email)}</a>`
 }
 
-function addresses(e) {
-  return e ? array(e).join(',') : undefined
-}
+const addresses = e => (e ? array(e).join(',') : undefined)
 
-function reverse(s) {
-  return s
+const reverse = s =>
+  s
     .split('')
     .reverse()
     .join('')
-}
 
-function wait(e) {
-  e.preventDefault()
-}
+const wait = e(e.preventDefault())
 
-function handleClick(e, l) {
+const handleClick = (e, l) => {
   e.preventDefault()
   window.location.href = l
 }
