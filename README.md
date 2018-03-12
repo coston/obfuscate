@@ -30,7 +30,7 @@ return html`
 #### Robot Interaction
 ```html
 <p>
-  Email: <a href="obfuscated" style="direction: rtl; unicode-bidi: bidi-override;">looc.notsoc@olleh</a>
+  Email: <a href="obfuscated">looc.notsoc@olleh</a>
 </p>
 ```
 
