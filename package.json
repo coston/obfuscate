@@ -1,6 +1,6 @@
 {
   "name": "obfuscate",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "An intelligent function to obfuscate any contact link",
   "main": "dist/obfuscate.js",
   "author": "Coston Perkins <coston.perkins@ua.edu> (https://coston.io)",

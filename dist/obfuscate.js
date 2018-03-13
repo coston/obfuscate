@@ -17,14 +17,6 @@ module.exports = function obfuscate(options) {
     body: options.body
   }
 
-  var styles = `
-    unicode-bidi: bidi-override; 
-    unicode-bidi: -webkit-isolate-override; 
-    unicode-bidi: -moz-isolate-override; 
-    unicode-bidi: -ms-isolate-override; 
-    unicode-bidi: isolate-override;
-  `
-
   var email = mailto.email
   mailto = filter(mailto, Boolean)
   delete mailto.email
@@ -34,7 +26,8 @@ module.exports = function obfuscate(options) {
   var link = 'mailto:' + (email || '') + (querystring
     ? '?' + querystring
     : '')
-  return bel `<a dir="rtl" style=${styles} onclick="${ function () {
+
+  return bel `<a style="direction: rtl; unicode-bidi: bidi-override;" onclick="${ function () {
     handleClick(event, link)}}" href="obfuscated">${reverse(email)}</a>`
   }
 

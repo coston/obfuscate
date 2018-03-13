@@ -1,51 +1,54 @@
-import assert from 'assert-ok'
-import array from 'cast-array'
-import filter from 'object-filter'
-import qs from 'query-string'
-import bel from 'bel'
+'use strict'
 
-export default function obfuscate(options) {
+var assert = require('assert-ok')
+var array = require('cast-array')
+var filter = require('object-filter')
+var qs = require('query-string')
+var bel = require('bel')
+
+module.exports = function obfuscate(options) {
   assert(options, 'options are required')
 
-  let mailto = {
+  var mailto = {
     email: addresses(options.email),
     cc: addresses(options.cc),
     bcc: addresses(options.bcc),
     subject: options.subject,
-    body: options.body,
+    body: options.body
   }
 
-  const styles = `
-    unicode-bidi: bidi-override; 
-    unicode-bidi: -webkit-isolate-override; 
-    unicode-bidi: -moz-isolate-override; 
-    unicode-bidi: -ms-isolate-override; 
-    unicode-bidi: isolate-override;
-  `
-
-  const email = mailto.email
+  var email = mailto.email
   mailto = filter(mailto, Boolean)
   delete mailto.email
 
-  const querystring = qs.stringify(mailto)
+  var querystring = qs.stringify(mailto)
 
-  const link = `mailto:${email || ''}${querystring ? '?' + querystring : ''}`
-  return bel`<a dir="rtl" style=${styles} onclick="${() => {
-    handleClick(event, link)
-  }}" href="obfuscated">${reverse(email)}</a>`
-}
+  var link = 'mailto:' + (email || '') + (querystring
+    ? '?' + querystring
+    : '')
 
-const addresses = e => (e ? array(e).join(',') : undefined)
+  return bel `<a style="direction: rtl; unicode-bidi: bidi-override;" onclick="${ function () {
+    handleClick(event, link)}}" href="obfuscated">${reverse(email)}</a>`
+  }
 
-const reverse = s =>
-  s
-    .split('')
-    .reverse()
-    .join('')
+  function addresses(e) {
+    return e
+      ? array(e).join(',')
+      : undefined
+  }
 
-const wait = e(e.preventDefault())
+  function reverse(s) {
+    return s
+      .split("")
+      .reverse()
+      .join("");
+  }
 
-const handleClick = (e, l) => {
-  e.preventDefault()
-  window.location.href = l
-}
+  function wait(e) {
+    e.preventDefault();
+  }
+
+  function handleClick(e, l) {
+    e.preventDefault()
+    window.location.href = l
+  }
