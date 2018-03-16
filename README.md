@@ -40,3 +40,14 @@ return html`
   Email: <a href="mailto:hello@coston.cool&subject=Question%20from%20the%20website&cc=friend@coston.cool">hello@coston.cool</a>
 </p>
 ```
+
+## Options
+
+Key      | Value
+----------|-----------
+email     |  email address of the intended recipient
+cc       |  email address to carbon copy email to
+bcc       |  email address to blind carbon copy to
+subject  |  subject of email
+body  |  body text of email
+
